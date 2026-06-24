@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BigQuery Release Notes Tracker</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar with list of releases -->
+        <aside class="sidebar">
+            <header class="sidebar-header">
+                <div class="logo-area">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <h1>BQ Releases</h1>
+                </div>
+                <button id="refresh-btn" class="btn btn-icon" title="Refresh Release Notes">
+                    <i class="fa-solid fa-rotate" id="refresh-icon"></i>
+                </button>
+            </header>
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="search-input" placeholder="Search updates...">
+                <button id="clear-search" class="clear-btn" style="display: none;">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="status-bar" id="status-bar">
+                Loading release notes...
+            </div>
+
+            <div class="releases-list-container">
+                <div class="releases-list" id="releases-list">
+                    <!-- Release items will be injected here -->
+                    <div class="skeleton-list">
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Detail & Tweet section -->
+        <main class="main-content">
+            <div class="empty-state" id="empty-state">
+                <div class="empty-illustration">
+                    <i class="fa-solid fa-newspaper"></i>
+                </div>
+                <h2>Select a Release Note</h2>
+                <p>Click on any release note in the sidebar to view full details and compose a Tweet.</p>
+            </div>
+
+            <div class="detail-view" id="detail-view" style="display: none;">
+                <div class="detail-card">
+                    <div class="detail-header">
+                        <span class="badge" id="detail-date">Date</span>
+                        <h2 id="detail-title">Release Title</h2>
+                        <a id="detail-link" href="#" target="_blank" class="external-link">
+                            View Original Source <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="detail-body" id="detail-body">
+                        <!-- HTML content of release note -->
+                    </div>
+                </div>
+
+                <!-- Tweet Composer Panel -->
+                <div class="tweet-composer-card">
+                    <div class="composer-header">
+                        <div class="twitter-user">
+                            <i class="fa-brands fa-twitter twitter-logo"></i>
+                            <div>
+                                <span class="user-name">Share Update</span>
+                                <span class="user-handle">@your_handle</span>
+                            </div>
+                        </div>
+                        <span class="char-counter" id="char-counter">0 / 280</span>
+                    </div>
+                    
+                    <div class="tweet-input-wrapper">
+                        <textarea id="tweet-textarea" placeholder="What's happening? Compose your tweet about this release note..."></textarea>
+                    </div>
+
+                    <div class="composer-actions">
+                        <button id="suggest-tweet-btn" class="btn btn-secondary">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Auto-Generate Text
+                        </button>
+                        <button id="tweet-btn" class="btn btn-primary">
+                            <i class="fa-brands fa-x-twitter"></i> Post to X / Tweet
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Script -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
